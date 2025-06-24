@@ -1,49 +1,90 @@
 #include <stdio.h>
 
+void moverTorre(int casas) {
+    if (casas == 0) {
+        return;
+    }
+    printf("Direita\n");
+    moverTorre(casas - 1);
+}
+
+void moverBispoRecursivo(int casas) {
+    if (casas == 0) {
+        return;
+    }
+    printf("Cima Direita\n");
+    moverBispoRecursivo(casas - 1);
+}
+
+
+void moverRainha(int casas) {
+    if (casas == 0) {
+        return;
+    }
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+
 int main() {
- 
+
     printf("Movimentação da Torre:\n");
-    for (int i = 1; i <= 5; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(5); 
     printf("\n");
 
+ 
+    printf("Movimentação do Bispo (Recursivo):\n");
+    moverBispoRecursivo(5); 
+    printf("\n");
+
+
+    printf("Movimentação do Bispo (Loops Aninhados):\n");
+
+
+    for (int vertical = 1; vertical <= 5; vertical++) {
     
-    printf("Movimentação do Bispo:\n");
-    int j = 1;
-    while (j <= 5) {
-        printf("Cima Direita\n");
-        j++;
+        for (int horizontal = 1; horizontal <= 1; horizontal++) {
+            printf("Cima Direita\n");
+        }
     }
     printf("\n");
 
-   
-    printf("Movimentação da Rainha:\n");
-    int k = 1;
-    do {
-        printf("Esquerda\n");
-        k++;
-    } while (k <= 8);
-    printf("\n");
 
+    printf("Movimentação da Rainha:\n");
+    moverRainha(8); 
+    printf("\n");
 
 
     printf("Movimentação do Cavalo:\n");
 
-   
-    for (int baixo = 1; baixo <= 2; baixo++) {
-        printf("Baixo\n");
-    }
+    int movimentosFeitos = 0;
 
+    for (int cima = 1; cima <= 2; cima++) {
+        if (cima == 2) {
+            printf("Cima\n");
+            movimentosFeitos++;
 
-    int esquerda = 1;
-    while (esquerda <= 1) {
-        printf("Esquerda\n");
-        esquerda++;
+           
+            for (int direita = 1; direita <= 1; direita++) {
+                if (movimentosFeitos >= 3) {
+                    break; 
+                }
+                printf("Direita\n");
+                movimentosFeitos++;
+
+               
+                if (movimentosFeitos > 3) {
+                    continue;
+                }
+            }
+
+            break; 
+        } else {
+            printf("Cima\n");
+            movimentosFeitos++;
+            continue;
+        }
     }
 
     return 0;
 }
-
-
-
